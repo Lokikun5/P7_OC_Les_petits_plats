@@ -1,0 +1,201 @@
+header {
+    display: flex;
+    justify-content: center;
+}
+
+main{
+padding-top: 10px;
+}
+
+.research{
+    width: 90%;
+    padding: 0 5% 0 5%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+
+#searchBar{
+    width: 100%;
+    height: 40px;
+    padding-left: 20px;
+    background-color: #E7E7E7;
+    border-radius: 5px 5px 5px 5px;
+    border: none;
+}
+
+#searchButton {
+    position: absolute;
+    right: 6%;
+    top: 5px;
+}
+
+
+
+.filterButtons{
+    position: absolute;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    z-index: 9999;
+}
+
+.filterResult{
+    width: 100%;
+    padding-top: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.filter{
+    margin-left: 20px;
+    padding-left: 10px;
+    width: 15%;
+    position: relative;
+    height: 50px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.ingredientsDiv{
+    background-color: #3282F7;
+}
+
+.ustensilsDiv{
+    background-color: #ED6454;
+}
+
+.appliancesDiv{
+    background-color: #68D9A4;
+}
+
+.downArrow{
+    position: absolute;
+    right: 7%;
+    top: 17px;
+}
+
+.button{
+    border: none;
+    width: 80%;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    font-size: 16px;
+    padding-top: 15px;
+}
+
+.listButtons{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    overflow: hidden;
+}
+
+.text{
+    font-size: 17px;
+    color: white;
+    left: 30%;
+    position: absolute;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+[hide='true']{
+    display: none;
+}
+
+@keyframes increaseSize {
+    from {width: 15%; height: auto;}
+    to {width: 30%; height: auto;}
+}
+
+@keyframes decreaseSize {
+    from {width: 30%; height: auto;}
+    to {width: 15%; height: 50px;}
+}
+
+
+
+#result{
+    padding-top: 70px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 50px;
+}
+
+.recipe{
+    height: 300px;
+    padding-top: 20px;
+}
+
+.fakeImg{
+    height: 50%;
+    background-color: #C7BEBE;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.infoContainer{
+    background-color: #E7E7E7;
+    height: 50%;
+    overflow: hidden;
+    border-radius: 0px 0px 5px 5px;
+}
+.infoFirstDiv{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+.timer {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 25%;
+    top: 30%;
+}
+
+.infoSecondDiv{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.recipeName{
+    padding-left: 10px;
+}
+
+.textTime{
+    position: absolute;
+    right: 10%;
+}
+
+.ingredients{
+    width:50%;
+}
+
+.ingredient{
+    font-size: 12px;
+    padding: 0 0 0 10px;
+    margin: 0;
+}
+
+.descriptionText{
+    margin: 0;
+    padding: 0 10px 10px 0;
+    font-size: 12px;
+    width: 50%;
+    height: 43%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+.noResult{
+    text-align: center;
+    padding-top: 100px;
+}

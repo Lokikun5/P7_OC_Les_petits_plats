@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <title>Les petits plats</title>
+  </head>
+  <body>
+    <header>
+      <img class="logo" src="img/logo.png" alt="logo">
+    </header>
+    <main id="main">
+        <div class="research">
+          <input type="search" id="searchBar" placeholder="Rechercher une recette">
+          <img id="searchButton" src="img/search.png" alt="search">
+        </div>
+        <div class = 'filterResult'></div>
+        <div class='filterButtons'>
+          <div  id='ingredientsDiv' class = 'ingredientsDiv filter' open="false">
+            <input value='Ingrédients' id='ingredientsInput' placeholder="ingrédient" class = 'button'></input>
+            <img class="downArrow" alt="downArrow" src="img/downArrow.png"/>
+          </div>
+          <div  id='appliancesDiv' class = 'appliancesDiv filter' open="false">
+            <input value='Appareils' id='appliancesInput' placeholder="appareil" class = 'button'></input>
+            <img class="downArrow" alt="downArrow" src="img/downArrow.png"/>
+          </div>
+          <div  id='ustensilsDiv' class = 'ustensilsDiv filter' open="false">
+            <input value='Ustensiles' id='ustensilsInput' placeholder="ustensil" class = 'button'></input>
+            <img class="downArrow" alt="downArrow" src="img/downArrow.png"/>
+          </div>
+        </div>
+        <div id="searchResult"></div>
+    </main>
+    <script type = "module" src="scripts/app.js"></script>
+    <script type = "module" src="scripts/recipes.js"></script>
+    <script type = "module" src ="scripts/recipeFactory.js"></script>
+  </body>
+</html>
