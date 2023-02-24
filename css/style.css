@@ -1,3 +1,6 @@
+html{
+    font-family: 'Lato', sans-serif;
+}
 header {
     display: flex;
     justify-content: center;
@@ -35,6 +38,7 @@ padding-top: 10px;
 .filterButtons{
     position: absolute;
     padding-top: 20px;
+    padding-left: 3vw;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -90,6 +94,15 @@ padding-top: 10px;
     background-color: rgba(0, 0, 0, 0);
     color: white;
     overflow: hidden;
+    
+}
+.listButtons p{
+    cursor: pointer;
+    transition: 500ms;
+    
+}
+.listButtons p:hover{
+    color: black;
 }
 
 .text{
@@ -121,14 +134,17 @@ textarea:focus, input:focus{
 
 #result{
     padding-top: 70px;
+    padding-left: 60px;
+    padding-right: 60px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 50px;
+    gap: 20px;
 }
 
 .recipe{
-    height: 300px;
+    height: 40vh;
     padding-top: 20px;
+    width: 90%;
 }
 
 .fakeImg{
@@ -139,7 +155,7 @@ textarea:focus, input:focus{
 
 .infoContainer{
     background-color: #E7E7E7;
-    height: 50%;
+    height: 53%;
     overflow: hidden;
     border-radius: 0px 0px 5px 5px;
 }
@@ -147,12 +163,13 @@ textarea:focus, input:focus{
     display: flex;
     flex-direction: row;
     position: relative;
+    padding-right: 100px;
 }
 .timer {
     width: 20px;
     height: 20px;
     position: absolute;
-    right: 25%;
+    right: 17%;
     top: 30%;
 }
 
@@ -164,35 +181,44 @@ textarea:focus, input:focus{
 }
 
 .recipeName{
-    padding-left: 10px;
+    padding-left: 8px;
+    font-weight: 700;
+
 }
 
 .textTime{
     position: absolute;
-    right: 10%;
+    right: 3%;
+
 }
 
 .ingredients{
     width:50%;
+    font-weight: 500;
 }
 
 .ingredient{
     font-size: 12px;
+    font-weight: 600;
     padding: 0 0 0 10px;
     margin: 0;
+
 }
 
 .descriptionText{
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0 10px 10px 0;
     font-size: 12px;
     width: 50%;
-    height: 43%;
+    height: 45%;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
+    font-weight: 500;
+
 }
 
 .noResult{
