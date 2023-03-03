@@ -82,83 +82,8 @@ function loadElements(recipes){
             }
         }
     });
-
-    appliances.sort();
-    ingredients.sort();
-    ustensils.sort();
 }
 
-function searchElement(event){
-
-    let wordToFind = event.target.value.toLowerCase();
-    
-    //reset list
-    let listRecipes = [];
-    reaserchListRecipes = [];
-
-    //if tags exist, the code will take the list of recipes coming from the filterTag function
-    //else it will take the 50 ingrendients
-    if(filteredRecipesByTags.length > 0){
-        listRecipes = filteredRecipesByTags;
-    }
-    else {
-        listRecipes = [...recipes];
-    }
-    
-    // if the character length of the input is longer than 2, we start the resesarch
-    if(wordToFind.length > 2){
-        listRecipes.forEach(recipe =>
-            {   
-                let recipeFound = false;
-
-                let recipieName = recipe.name.toLowerCase();
-                if(recipieName.includes(wordToFind)){
-                    if(!reaserchListRecipes.includes(recipe)){
-                        reaserchListRecipes.push(recipe);
-                        recipeFound = true;
-                    }
-                }
-
-                if(!recipeFound){
-                    let listIngredients = recipe.ingredients;
-                    for(let i=0 ; i < listIngredients.length  ; i++){
-                        let ingredient = listIngredients[i].ingredient.toLowerCase();
-                        if(ingredient.includes(wordToFind)){
-                            if(!reaserchListRecipes.includes(recipe)){
-                                reaserchListRecipes.push(recipe); 
-                            }
-                            recipeFound = true;
-                            break;
-                        }
-                    }
-                }
-                
-                if(!recipeFound){
-                    let description = recipe.description
-                        if(description.includes(wordToFind)){
-                        if(!reaserchListRecipes.includes(recipe)){
-                            reaserchListRecipes.push(recipe); 
-                        }
-                    }
-                }
-            });
-            
-
-            //if the number of recipes is bigger than 0, we will refresh the list of appliances,ingredients,
-            //ustensils with the new list of recipes and display the recipes
-            loadElements(reaserchListRecipes);
-            listOfRecipes = reaserchListRecipes;
-            addToDOM();
-    
-            
-    }
-
-    //if the number of input characters is smaller than 2 then we refresh the list of appliances, ingredients...
-    //and display the correct recipes
-    else {
-        filterByTag();
-    }
-}
 
 // load all Recipe card
 function addToDOM(){
@@ -201,10 +126,8 @@ function getFilter(input, div, type, listOfElement){
             element.addEventListener('click', function(){addATag(listOfElement[i],type,div,listElements,input)})
             element.innerText = listOfElement[i];
             listElements.appendChild(element);
-        }
-        
+        }   
     }
-   
 }
 
 
@@ -233,7 +156,6 @@ function getSmallFilter(input, div, type, listOfElement){
 
 function addATag(elementName, type, div, listElements, input){
     console.log('salut')
-    
     
     const tag = document.createElement('div');
     tag.setAttribute('class', 'filter');
@@ -278,12 +200,11 @@ function addATag(elementName, type, div, listElements, input){
 }
 
 function filterByTag(){
-    //refresh list
+  
     let newListRecipes = [];
     let listRecipes = [];
     
-    //if the length of the recipes coming from the researchList, we will take this list
-    //else we take the 50 ingredients
+    
     if(reaserchListRecipes.length > 0){
         listRecipes = reaserchListRecipes;
     }
@@ -291,36 +212,29 @@ function filterByTag(){
         listRecipes = [...recipes];
     }
     
-    //iterates through the list of recipes
     listRecipes.forEach(recipe =>
     { 
         let recipeToAdd = true;
-        //check if applianceTags exists
+       
         if(applianceTags.length > 0){
-            // iniate the number of appliances to find
+           
             let appliancesFound = 0;
-            // iniate the number of appliances to get with the number of tags
             let appliancesToFound = applianceTags.length;
                 let appliance = recipe.appliance.toLowerCase();
                 for(let i=0; i < applianceTags.length; i++){
                     let applianceTag = applianceTags[i];
-                    //if the appliance is found, increase the number of appliancesToFound by 1
+                   
                     if(appliance.includes(applianceTag)){
                         appliancesFound += 1;
                         break;
                     }    
                 }
             
-            //if the number of appliances found is not equal to the to the number of appliances to found
-            // we will not add the recipes to the list.
             if(appliancesToFound != appliancesFound){
                 recipeToAdd = false;
             }
         }
         
-
-    
-        //doing the same treatments than the appliances
         if (ingredientTags.length > 0) {
             let listIngredients = recipe.ingredients;
             let ingredientsFounds = 0;
@@ -340,8 +254,6 @@ function filterByTag(){
             }
         }
 
-
-        //doing the same treatments than the appliances
         if(ustensilTags.length > 0){
             let ustensilsFound = 0;
             let ustensilsToFound = ustensilTags.length;
@@ -360,7 +272,6 @@ function filterByTag(){
             }
         }
 
-        //if the recipe get all the tags, we will add it
         if(recipeToAdd == true){
             newListRecipes.push(recipe);
         }
@@ -374,9 +285,9 @@ function removeTag(elementName, type){
     let index;
     switch (type){
         case 'appliance':
-            //get the index of the element with the name of the element
+            
             index = applianceTags.indexOf(elementName);
-            //remove the element from the list
+           
             applianceTags.splice(index, 1);
             break;
         
@@ -391,19 +302,18 @@ function removeTag(elementName, type){
             break;
     }
 
-    //call the function to filter by tag
      filterByTag();
 
-    //remove the element from the page
+   
     const elementToRemove = document.getElementById(elementName);
     filterResult.removeChild(elementToRemove);
 }
 
 function filterButtonList(event, type){
-    let wordToFind = event.target.value.toLowerCase();
+    let wordFind = event.target.value.toLowerCase();
     const elementsToHide = document.querySelectorAll('[tag="'+type+'"]');
-    const regex = new RegExp('^'+wordToFind)
-    if(wordToFind.length > 0){
+    const regex = new RegExp('^'+wordFind)
+    if(wordFind.length > 0){
         elementsToHide.forEach(element => {
             let name = element.getAttribute('name');
             if(!name.match(regex)){
