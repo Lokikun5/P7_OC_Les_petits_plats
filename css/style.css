@@ -50,14 +50,15 @@ padding-top: 10px;
     padding-top: 20px;
     display: flex;
     flex-direction: row;
+    padding-left: 49px;
 }
 
 .filter{
     margin-left: 20px;
     padding-left: 10px;
-    width: 15%;
+    width: 14%;
     position: relative;
-    height: 50px;
+    height: 60px;
     border-radius: 5px 5px 5px 5px;
 }
 
@@ -77,6 +78,7 @@ padding-top: 10px;
     position: absolute;
     right: 7%;
     top: 17px;
+    cursor: pointer;
 }
 
 .button{
@@ -96,19 +98,25 @@ padding-top: 10px;
     overflow: hidden;
     
 }
+.smallListButtons{
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    overflow: hidden;
+}
 .listButtons p{
     cursor: pointer;
     transition: 500ms;
-    
+    margin-left: 1rem;  
 }
 .listButtons p:hover{
     color: black;
+    scale: 1.1;
 }
 
 .text{
     font-size: 17px;
     color: white;
-    left: 30%;
+    left: 3vw;
     position: absolute;
 }
 
@@ -131,7 +139,10 @@ textarea:focus, input:focus{
 }
 
 
-
+@keyframes increaseSmallSize {
+    from {width: 15%; height: auto;}
+    to {width: 15%; height: auto;}
+}
 #result{
     padding-top: 70px;
     padding-left: 60px;
