@@ -196,89 +196,9 @@ function addATag(elementName, type, div, listElements, input){
     div.style.animation = '1s decreaseSize forwards';
     div.setAttribute('open','false');
     input.value = inputText;
-    // filterByTag();
 }
 
-function filterByTag(){
-  
-    let newListRecipes = [];
-    let listRecipes = [];
-    
-    
-    if(reaserchListRecipes.length > 0){
-        listRecipes = reaserchListRecipes;
-    }
-    else {
-        listRecipes = [...recipes];
-    }
-    
-    listRecipes.forEach(recipe =>
-    { 
-        let recipeToAdd = true;
-       
-        if(applianceTags.length > 0){
-           
-            let appliancesFound = 0;
-            let appliancesToFound = applianceTags.length;
-                let appliance = recipe.appliance.toLowerCase();
-                for(let i=0; i < applianceTags.length; i++){
-                    let applianceTag = applianceTags[i];
-                   
-                    if(appliance.includes(applianceTag)){
-                        appliancesFound += 1;
-                        break;
-                    }    
-                }
-            
-            if(appliancesToFound != appliancesFound){
-                recipeToAdd = false;
-            }
-        }
-        
-        if (ingredientTags.length > 0) {
-            let listIngredients = recipe.ingredients;
-            let ingredientsFounds = 0;
-            let ingredientsToFound = ingredientTags.length;
-            for(let i=0 ; i < listIngredients.length; i++){
-                let ingredient = listIngredients[i].ingredient.toLowerCase();
-                for( let i=0; i < ingredientTags.length; i++){
-                    let ingredientTag = ingredientTags[i];
-                    if(ingredient.includes(ingredientTag)){
-                        ingredientsFounds += 1;
-                        break;
-                    }    
-                }
-            }
-            if(ingredientsToFound != ingredientsFounds){
-                recipeToAdd = false;
-            }
-        }
 
-        if(ustensilTags.length > 0){
-            let ustensilsFound = 0;
-            let ustensilsToFound = ustensilTags.length;
-            for(let i=0; i < recipe.ustensils.length; i++){
-                let ustensil = recipe.ustensils[i].toLowerCase();
-                for(let i=0; i < ustensilTags.length; i++){
-                    let ustensilTag = ustensilTags[i];
-                    if(ustensil.includes(ustensilTag)){
-                        ustensilsFound += 1;
-                        break;
-                    }    
-                }
-            }
-            if(ustensilsToFound != ustensilsFound){
-                recipeToAdd = false;
-            }
-        }
-
-        if(recipeToAdd == true){
-            newListRecipes.push(recipe);
-        }
-    
-    });
-
-}
 
 
 function removeTag(elementName, type){
@@ -302,7 +222,7 @@ function removeTag(elementName, type){
             break;
     }
 
-     filterByTag();
+   
 
    
     const elementToRemove = document.getElementById(elementName);
