@@ -108,11 +108,20 @@ padding-top: 10px;
     transition: 500ms;
     margin-left: 1rem;  
 }
+.smallListButtons p{
+    cursor: pointer;
+    transition: 500ms;
+    margin-left: 1rem;
+}
+
 .listButtons p:hover{
     color: black;
     scale: 1.1;
 }
-
+.smallListButtons p:hover{
+    color: black;
+    scale: 1.1;
+}
 .text{
     font-size: 17px;
     color: white;
