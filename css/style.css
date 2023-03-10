@@ -58,7 +58,7 @@ padding-top: 10px;
     padding-left: 10px;
     width: 14%;
     position: relative;
-    height: 60px;
+    height: 50px;
     border-radius: 5px 5px 5px 5px;
 }
 
@@ -125,7 +125,7 @@ padding-top: 10px;
 .text{
     font-size: 17px;
     color: white;
-    left: 3vw;
+    left: 1vw;
     position: absolute;
 }
 
@@ -139,7 +139,7 @@ textarea:focus, input:focus{
 
 @keyframes increaseSize {
     from {width: 15%; height: auto;}
-    to {width: 30%; height: auto;}
+    to {width: 30%; height: auto; }
 }
 
 @keyframes decreaseSize {

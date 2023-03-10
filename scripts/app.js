@@ -109,9 +109,32 @@ function addToDOM(){
 } addToDOM()
 
 // open dropdown function
-function getFilter(input, div, type, listOfElement){
+function getSmallFilter(input, div, type, listOfElement){
     let open = div.getAttribute('open');
     if(open === 'false'){
+        div.setAttribute('open','true');
+        
+        div.style.animation = '1s increaseSmallSize forwards';
+        input.value = '';
+        const listElements = document.createElement('div');
+        div.appendChild(listElements);
+        listElements.setAttribute('class','smallListButtons');
+        for (let i =0; i < listOfElement.length; i++){
+            const element = document.createElement('p');
+            element.setAttribute('tag', type);
+            element.setAttribute('name', listOfElement[i]);
+            element.setAttribute('hide', 'false');
+            element.addEventListener('click', function(){addATag(listOfElement[i],type,div,listElements,input)});
+            element.innerText = listOfElement[i];
+            listElements.appendChild(element);
+        } 
+    }
+}
+
+function getFilter(input, div, type, listOfElement){
+    
+    let open = div.getAttribute('open');
+    if(open === 'false' || open === 'true'){
         div.setAttribute('open','true');
         div.style.animation = '1s increaseSize forwards';
         input.value = '';
@@ -131,31 +154,8 @@ function getFilter(input, div, type, listOfElement){
 }
 
 
-function getSmallFilter(input, div, type, listOfElement){
-    let open = div.getAttribute('open');
-    if(open === 'false'){
-        div.setAttribute('open','true');
-        div.style.animation = '1s increaseSmallSize forwards';
-        input.value = '';
-        const listElements = document.createElement('div');
-        div.appendChild(listElements);
-        listElements.setAttribute('class','smallListButtons');
-        for (let i =0; i < listOfElement.length; i++){
-            const element = document.createElement('p');
-            element.setAttribute('tag', type);
-            element.setAttribute('name', listOfElement[i]);
-            element.setAttribute('hide', 'false');
-            element.addEventListener('click', function(){addATag(listOfElement[i],type,div,listElements,input)});
-            element.innerText = listOfElement[i];
-            listElements.appendChild(element);
-        }
-        
-    }
-   
-}
-
 function addATag(elementName, type, div, listElements, input){
-    console.log('salut')
+    
     
     const tag = document.createElement('div');
     tag.setAttribute('class', 'filter');
@@ -221,10 +221,7 @@ function removeTag(elementName, type){
             ingredientTags.splice(index, 1);
             break;
     }
-
-   
-
-   
+    
     const elementToRemove = document.getElementById(elementName);
     filterResult.removeChild(elementToRemove);
 }
