@@ -34,7 +34,6 @@ padding-top: 10px;
 }
 
 
-
 .filterButtons{
     position: absolute;
     padding-top: 20px;
@@ -60,6 +59,7 @@ padding-top: 10px;
     position: relative;
     height: 50px;
     border-radius: 5px 5px 5px 5px;
+    z-index: 1;
 }
 
 .ingredientsDiv{
@@ -136,7 +136,34 @@ textarea:focus, input:focus{
 [hide='true']{
     display: none;
 }
+.dropdown{
+    background-color: #3282F7;
+    width: 15%;
+    height: inherit;
+    position: relative;
+    left: -15%;
+    right: 0%;
+    top: 12%;
+    bottom: 0%;
+    display: none;
+    border-radius: 5px;
+}
 
+.largedropdown{
+    background-color: #3282F7;
+    border-radius: 5px;
+    height: inherit;
+    width: inherit;
+    position: relative;
+    left: -15%;
+    right: 0%;
+    top: -1%;
+    bottom: 0%;
+    border-radius: 5px;
+    display: none;
+    margin-left: 20px;
+
+}
 @keyframes increaseSize {
     from {width: 15%; height: auto;}
     to {width: 30%; height: auto; }

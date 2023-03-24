@@ -15,10 +15,13 @@ let reaserchListRecipes = [];
 //init list appliances/recipes/ingredients
 loadElements(recipes);
 
-// open dropdown
+//  ingredients dropdown triger  
 const ingredientsInput = document.getElementById('ingredientsInput');
 const ingredientsSearch = document.getElementById('ingredientsSearch');
-const ingredientsDiv = document.getElementById('ingredientsDiv');
+
+// Search ingredients
+ingredientsSearch.addEventListener('input', (event) => {filterButtonList(event, 'ingredient')});
+
 
 const ustensilsInput = document.getElementById('ustensilsInput');
 const ustensilsDiv = document.getElementById('ustensilsDiv');
@@ -28,15 +31,20 @@ const appliancesSearch = document.getElementById('appliancesSearch');
 const appliancesInput = document.getElementById('appliancesInput');
 const appliancesDiv = document.getElementById('appliancesDiv');
 
+// small and big dropdown
+const newDropdown = document.querySelector('.dropdown');
+const largedropdown = document.querySelector('.largedropdown');
+
+
 const filterResult = document.getElementsByClassName('filterResult')[0];
-ingredientsInput.addEventListener('click', function(){getFilter(ingredientsInput, ingredientsDiv, 'ingredient', ingredients)});
+// ingredientsInput.addEventListener('click', function(){getFilter(ingredientsInput, newDropdown, 'ingredient', ingredients)});
 ustensilsInput.addEventListener('click', function(){getFilter(ustensilsInput, ustensilsDiv, 'ustensil', ustensils)});
 
 appliancesInput.addEventListener('click', function(){getFilter(appliancesInput, appliancesDiv, 'appliance', appliances)});
 appliancesSearch.addEventListener('click', function(){getSmallFilter(appliancesInput, appliancesDiv, 'appliance', appliances)});
 
-ingredientsSearch.addEventListener('input', (event) => {filterButtonList(event, 'ingredient')});
-ingredientsSearch.addEventListener('click', function(){getSmallFilter(ingredientsInput, ingredientsDiv, 'ingredient', ingredients)});
+
+// ingredientsSearch.addEventListener('click', function(){getSmallFilter(ingredientsInput, ingredientsDiv, 'ingredient', ingredients)});
 
 ustensilsSearch.addEventListener('input', (event) => {filterButtonList(event, 'ustensil')});
 ustensilsSearch.addEventListener('click', function(){getSmallFilter(ustensilsInput, ustensilsDiv, 'ustensil', ustensils)});
@@ -109,50 +117,62 @@ function addToDOM(){
 } addToDOM()
 
 // open dropdown function
-function getSmallFilter(input, div, type, listOfElement){
-    let open = div.getAttribute('open');
-    if(open === 'false'){
-        div.setAttribute('open','true');
-        
-        div.style.animation = '1s increaseSmallSize forwards';
+function getSmallFilter(input, newDropdown, type, listOfElement){
+   
         input.value = '';
         const listElements = document.createElement('div');
-        div.appendChild(listElements);
+        listElements.setAttribute('class','dropdown');
+        newDropdown.appendChild(listElements);
         listElements.setAttribute('class','smallListButtons');
         for (let i =0; i < listOfElement.length; i++){
             const element = document.createElement('p');
             element.setAttribute('tag', type);
             element.setAttribute('name', listOfElement[i]);
             element.setAttribute('hide', 'false');
-            element.addEventListener('click', function(){addATag(listOfElement[i],type,div,listElements,input)});
+            element.addEventListener('click', function(){addATag(listOfElement[i],type,newDropdown,listElements,input)});
             element.innerText = listOfElement[i];
             listElements.appendChild(element);
         } 
     }
+
+function getFilter(input, largedropdown, type, listOfElement){
+
+    input.value = '';
+    const listElements = document.createElement('div');
+    listElements.setAttribute('class','dropdown');
+    largedropdown.appendChild(listElements);
+    listElements.setAttribute('class','smallListButtons');
+    listElements.style.display = "flex";
+    listElements.style.flexWrap = "wrap";
+    listElements.style.marginTop = "41px";
+    for (let i =0; i < listOfElement.length; i++){
+        const element = document.createElement('p');
+        element.setAttribute('tag', type);
+        element.setAttribute('name', listOfElement[i]);
+        element.setAttribute('hide', 'false');
+        element.addEventListener('click', function(){addATag(listOfElement[i],type,largedropdown,listElements,input)});
+        element.innerText = listOfElement[i];
+        listElements.appendChild(element);
+    } 
 }
 
-function getFilter(input, div, type, listOfElement){
+ingredientsSearch.addEventListener('click', function(){
     
-    let open = div.getAttribute('open');
-    if(open === 'false' || open === 'true'){
-        div.setAttribute('open','true');
-        div.style.animation = '1s increaseSize forwards';
-        input.value = '';
-        const listElements = document.createElement('div');
-        div.appendChild(listElements);
-        listElements.setAttribute('class','listButtons');
-        for (let i =0; i < listOfElement.length; i++){
-            const element = document.createElement('p');
-            element.setAttribute('tag', type);
-            element.setAttribute('name', listOfElement[i]);
-            element.setAttribute('hide', 'false');
-            element.addEventListener('click', function(){addATag(listOfElement[i],type,div,listElements,input)})
-            element.innerText = listOfElement[i];
-            listElements.appendChild(element);
-        }   
-    }
-}
+    newDropdown.style.display = "block";
+    largedropdown.style.display = "none";
 
+    getSmallFilter(ingredientsInput, newDropdown, 'ingredient', ingredients)
+
+
+});
+
+ingredientsInput.addEventListener('click', function(){
+    
+    largedropdown.style.display = "block";
+    newDropdown.style.display = "none";
+    getFilter(ingredientsInput, largedropdown, 'ingredient', ingredients)
+
+});
 
 function addATag(elementName, type, div, listElements, input){
     
@@ -193,12 +213,10 @@ function addATag(elementName, type, div, listElements, input){
     tag.style.backgroundColor = color;
     filterResult.appendChild(tag);
     div.removeChild(listElements);
-    div.style.animation = '1s decreaseSize forwards';
-    div.setAttribute('open','false');
+    newDropdown.style.display = "none";
+    largedropdown.style.display = "none";
     input.value = inputText;
 }
-
-
 
 
 function removeTag(elementName, type){
