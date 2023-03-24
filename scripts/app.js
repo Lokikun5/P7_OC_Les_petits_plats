@@ -23,33 +23,36 @@ const ingredientsSearch = document.getElementById('ingredientsSearch');
 ingredientsSearch.addEventListener('input', (event) => {filterButtonList(event, 'ingredient')});
 
 
+//  ustensils dropdown triger 
 const ustensilsInput = document.getElementById('ustensilsInput');
-const ustensilsDiv = document.getElementById('ustensilsDiv');
 const ustensilsSearch = document.getElementById('ustensilsSearch');
 
+// search ustensils
+ustensilsSearch.addEventListener('input', (event) => {filterButtonList(event, 'ustensil')});
+
+
+// appliances dropdown triger
 const appliancesSearch = document.getElementById('appliancesSearch');
 const appliancesInput = document.getElementById('appliancesInput');
-const appliancesDiv = document.getElementById('appliancesDiv');
+
+// search appliances
+appliancesSearch.addEventListener('input', (event) => {filterButtonList(event, 'appliance')});
 
 // small and big dropdown
 const newDropdown = document.querySelector('.dropdown');
 const largedropdown = document.querySelector('.largedropdown');
 
 
+// small and big dropdown for ustensils
+const newDropdown2 = document.querySelector('.dropdown2');
+const largedropdown2 = document.querySelector('.largedropdown2');
+
+// small and big dropdown for appliances
+const newDropdown3 = document.querySelector('.dropdown3');
+const largedropdown3 = document.querySelector('.largedropdown3');
+
+
 const filterResult = document.getElementsByClassName('filterResult')[0];
-// ingredientsInput.addEventListener('click', function(){getFilter(ingredientsInput, newDropdown, 'ingredient', ingredients)});
-ustensilsInput.addEventListener('click', function(){getFilter(ustensilsInput, ustensilsDiv, 'ustensil', ustensils)});
-
-appliancesInput.addEventListener('click', function(){getFilter(appliancesInput, appliancesDiv, 'appliance', appliances)});
-appliancesSearch.addEventListener('click', function(){getSmallFilter(appliancesInput, appliancesDiv, 'appliance', appliances)});
-
-
-// ingredientsSearch.addEventListener('click', function(){getSmallFilter(ingredientsInput, ingredientsDiv, 'ingredient', ingredients)});
-
-ustensilsSearch.addEventListener('input', (event) => {filterButtonList(event, 'ustensil')});
-ustensilsSearch.addEventListener('click', function(){getSmallFilter(ustensilsInput, ustensilsDiv, 'ustensil', ustensils)});
-
-appliancesSearch.addEventListener('input', (event) => {filterButtonList(event, 'appliance')});
 
 
 function loadElements(recipes){
@@ -92,7 +95,6 @@ function loadElements(recipes){
     });
 }
 
-
 // load all Recipe card
 function addToDOM(){
     const searchOuput = document.getElementById('searchResult');
@@ -116,7 +118,7 @@ function addToDOM(){
         
 } addToDOM()
 
-// open dropdown function
+// load list of element function (for ingredients)
 function getSmallFilter(input, newDropdown, type, listOfElement){
    
         input.value = '';
@@ -134,6 +136,7 @@ function getSmallFilter(input, newDropdown, type, listOfElement){
             listElements.appendChild(element);
         } 
     }
+
 
 function getFilter(input, largedropdown, type, listOfElement){
 
@@ -155,11 +158,97 @@ function getFilter(input, largedropdown, type, listOfElement){
         listElements.appendChild(element);
     } 
 }
+// load list of element function (for ustensiles)
+function getSmallFilterU(input, newDropdown2, type, listOfElement){
+   
+    input.value = '';
+    const listElements = document.createElement('div');
+    listElements.setAttribute('class','dropdown');
+    newDropdown2.appendChild(listElements);
+    listElements.setAttribute('class','smallListButtons');
+    for (let i =0; i < listOfElement.length; i++){
+        const element = document.createElement('p');
+        element.setAttribute('tag', type);
+        element.setAttribute('name', listOfElement[i]);
+        element.setAttribute('hide', 'false');
+        element.addEventListener('click', function(){addATag(listOfElement[i],type,newDropdown2,listElements,input)});
+        element.innerText = listOfElement[i];
+        listElements.appendChild(element);
+    } 
+}
 
+function getFilterU(input, largedropdown2, type, listOfElement){
+
+    input.value = '';
+    const listElements = document.createElement('div');
+    listElements.setAttribute('class','dropdown');
+    largedropdown2.appendChild(listElements);
+    listElements.setAttribute('class','smallListButtons');
+    listElements.style.display = "flex";
+    listElements.style.flexWrap = "wrap";
+    listElements.style.marginTop = "41px";
+    for (let i =0; i < listOfElement.length; i++){
+        const element = document.createElement('p');
+        element.setAttribute('tag', type);
+        element.setAttribute('name', listOfElement[i]);
+        element.setAttribute('hide', 'false');
+        element.addEventListener('click', function(){addATag(listOfElement[i],type,largedropdown2,listElements,input)});
+        element.innerText = listOfElement[i];
+        listElements.appendChild(element);
+    } 
+}
+
+// load list of element function (for appliances)
+function getSmallFilterA(input, newDropdown3, type, listOfElement){
+   
+    input.value = '';
+    const listElements = document.createElement('div');
+    listElements.setAttribute('class','dropdown');
+    newDropdown3.appendChild(listElements);
+    listElements.setAttribute('class','smallListButtons');
+    for (let i =0; i < listOfElement.length; i++){
+        const element = document.createElement('p');
+        element.setAttribute('tag', type);
+        element.setAttribute('name', listOfElement[i]);
+        element.setAttribute('hide', 'false');
+        element.addEventListener('click', function(){addATag(listOfElement[i],type,newDropdown3,listElements,input)});
+        element.innerText = listOfElement[i];
+        listElements.appendChild(element);
+    } 
+}
+
+function getFilterA(input, largedropdown3, type, listOfElement){
+
+    input.value = '';
+    const listElements = document.createElement('div');
+    listElements.setAttribute('class','dropdown');
+    largedropdown3.appendChild(listElements);
+    listElements.setAttribute('class','smallListButtons');
+    listElements.style.display = "flex";
+    listElements.style.flexWrap = "wrap";
+    listElements.style.marginTop = "41px";
+    for (let i =0; i < listOfElement.length; i++){
+        const element = document.createElement('p');
+        element.setAttribute('tag', type);
+        element.setAttribute('name', listOfElement[i]);
+        element.setAttribute('hide', 'false');
+        element.addEventListener('click', function(){addATag(listOfElement[i],type,largedropdown3,listElements,input)});
+        element.innerText = listOfElement[i];
+        listElements.appendChild(element);
+    } 
+}
+
+// ingredients dropdown function
 ingredientsSearch.addEventListener('click', function(){
     
     newDropdown.style.display = "block";
     largedropdown.style.display = "none";
+
+    newDropdown2.style.display = "none";
+    largedropdown2.style.display = "none";
+
+    newDropdown3.style.display = "none";
+    largedropdown3.style.display = "none";
 
     getSmallFilter(ingredientsInput, newDropdown, 'ingredient', ingredients)
 
@@ -170,9 +259,76 @@ ingredientsInput.addEventListener('click', function(){
     
     largedropdown.style.display = "block";
     newDropdown.style.display = "none";
+
+    newDropdown2.style.display = "none";
+    largedropdown2.style.display = "none";
+
+    newDropdown3.style.display = "none";
+    largedropdown3.style.display = "none";
+
     getFilter(ingredientsInput, largedropdown, 'ingredient', ingredients)
 
 });
+
+// ustensils dropdown function
+ustensilsSearch.addEventListener('click', function(){
+    
+    newDropdown2.style.display = "block";
+    largedropdown2.style.display = "none";
+
+    newDropdown.style.display = "none";
+    largedropdown.style.display = "none";
+
+    newDropdown3.style.display = "none";
+    largedropdown3.style.display = "none";
+
+    getSmallFilterU(ustensilsInput, newDropdown2, 'ustensil', ustensils)
+
+
+});
+
+ustensilsInput.addEventListener('click', function(){
+    
+    largedropdown2.style.display = "block";
+    newDropdown2.style.display = "none";
+
+    newDropdown.style.display = "none";
+    largedropdown.style.display = "none";
+
+    newDropdown3.style.display = "none";
+    largedropdown3.style.display = "none";
+
+    
+    getFilterU(ustensilsInput, largedropdown2, 'ustensil', ustensils)
+
+});
+
+
+// appliance dropdown function
+appliancesSearch.addEventListener('click', function(){
+    
+    newDropdown3.style.display = "block";
+    largedropdown3.style.display = "none";
+
+    largedropdown2.style.display = "none";
+    newDropdown2.style.display = "none";
+
+    newDropdown.style.display = "none";
+    largedropdown.style.display = "none";
+
+    getSmallFilterA(appliancesInput, newDropdown3, 'appliance', appliances)
+
+
+});
+
+appliancesInput.addEventListener('click', function(){
+    
+    largedropdown3.style.display = "block";
+    newDropdown3.style.display = "none";
+    getFilterA(ustensilsInput, largedropdown3, 'appliance', appliances)
+
+});
+
 
 function addATag(elementName, type, div, listElements, input){
     
@@ -215,6 +371,10 @@ function addATag(elementName, type, div, listElements, input){
     div.removeChild(listElements);
     newDropdown.style.display = "none";
     largedropdown.style.display = "none";
+    newDropdown2.style.display = "none";
+    largedropdown2.style.display = "none";
+    newDropdown3.style.display = "none";
+    largedropdown3.style.display = "none";
     input.value = inputText;
 }
 

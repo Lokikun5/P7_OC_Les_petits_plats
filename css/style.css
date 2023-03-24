@@ -164,6 +164,66 @@ textarea:focus, input:focus{
     margin-left: 20px;
 
 }
+.dropdown2{
+    background-color: #ED6454;
+    width: 15%;
+    height: inherit;
+    position: relative;
+    position: relative;
+    left: -15%;
+    right: 0%;
+    top: 12%;
+    bottom: 0%;
+    display: none;
+    border-radius: 5px;
+}
+
+.largedropdown2{
+    background-color: #ED6454;
+    border-radius: 5px;
+    height: inherit;
+    width: inherit;
+    position: relative;
+    left: -15%;
+    right: 0%;
+    top: -1%;
+    bottom: 0%;
+    border-radius: 5px;
+    display: none;
+    margin-left: 80px;
+
+}
+
+.dropdown3{
+    background-color: #68D9A4;
+    width: 15%;
+    height: inherit;
+    position: relative;
+    position: relative;
+    left: -15%;
+    right: 0%;
+    top: 12%;
+    bottom: 0%;
+    display: none;
+    border-radius: 5px;
+}
+
+.largedropdown3{
+    background-color: #68D9A4;
+    border-radius: 5px;
+    height: inherit;
+    width: inherit;
+    position: relative;
+    left: -15%;
+    right: 0%;
+    top: -1%;
+    bottom: 0%;
+    border-radius: 5px;
+    display: none;
+    margin-left: 80px;
+
+}
+
 @keyframes increaseSize {
     from {width: 15%; height: auto;}
     to {width: 30%; height: auto; }
