@@ -243,12 +243,14 @@ ingredientsSearch.addEventListener('click', function(){
     
     newDropdown.style.display = "block";
     largedropdown.style.display = "none";
-
+    
     newDropdown2.style.display = "none";
     largedropdown2.style.display = "none";
 
     newDropdown3.style.display = "none";
     largedropdown3.style.display = "none";
+
+    document.querySelector('.appliancesDiv').style.display = "block";
 
     getSmallFilter(ingredientsInput, newDropdown, 'ingredient', ingredients)
 
@@ -259,7 +261,8 @@ ingredientsInput.addEventListener('click', function(){
     
     largedropdown.style.display = "block";
     newDropdown.style.display = "none";
-
+    document.querySelector('.ingredientsDiv').style.display = "none";
+    document.querySelector('.appliancesDiv').style.display = "block";
     newDropdown2.style.display = "none";
     largedropdown2.style.display = "none";
 
@@ -282,6 +285,9 @@ ustensilsSearch.addEventListener('click', function(){
     newDropdown3.style.display = "none";
     largedropdown3.style.display = "none";
 
+    document.querySelector('.ingredientsDiv').style.display = "block";
+    document.querySelector('.appliancesDiv').style.display = "block";
+
     getSmallFilterU(ustensilsInput, newDropdown2, 'ustensil', ustensils)
 
 
@@ -291,7 +297,8 @@ ustensilsInput.addEventListener('click', function(){
     
     largedropdown2.style.display = "block";
     newDropdown2.style.display = "none";
-
+    document.querySelector('.ustensilsDiv').style.display = "none";
+    
     newDropdown.style.display = "none";
     largedropdown.style.display = "none";
 
@@ -299,7 +306,9 @@ ustensilsInput.addEventListener('click', function(){
     largedropdown3.style.display = "none";
 
     
-    getFilterU(ustensilsInput, largedropdown2, 'ustensil', ustensils)
+    getFilterU(ustensilsInput, largedropdown2, 'ustensil', ustensils);
+    document.querySelector('.ingredientsDiv').style.display = "block";
+    document.querySelector('.appliancesDiv').style.display = "block";
 
 });
 
@@ -315,9 +324,10 @@ appliancesSearch.addEventListener('click', function(){
 
     newDropdown.style.display = "none";
     largedropdown.style.display = "none";
-
-    getSmallFilterA(appliancesInput, newDropdown3, 'appliance', appliances)
-
+    document.querySelector('.ustensilsDiv').style.display = "block";
+    document.querySelector('.ingredientsDiv').style.display = "block";
+    document.querySelector('.appliancesDiv').style.display = "block";
+    getSmallFilterA(appliancesInput, newDropdown3, 'appliance', appliances);
 
 });
 
@@ -325,6 +335,16 @@ appliancesInput.addEventListener('click', function(){
     
     largedropdown3.style.display = "block";
     newDropdown3.style.display = "none";
+    document.querySelector('.appliancesDiv').style.display = "none";
+
+    largedropdown2.style.display = "none";
+    newDropdown2.style.display = "none";
+
+    newDropdown.style.display = "none";
+    largedropdown.style.display = "none";
+
+    document.querySelector('.ustensilsDiv').style.display = "block";
+    document.querySelector('.ingredientsDiv').style.display = "block";
     getFilterA(ustensilsInput, largedropdown3, 'appliance', appliances)
 
 });
@@ -375,6 +395,9 @@ function addATag(elementName, type, div, listElements, input){
     largedropdown2.style.display = "none";
     newDropdown3.style.display = "none";
     largedropdown3.style.display = "none";
+    document.querySelector('.ingredientsDiv').style.display = "block";
+    document.querySelector('.ustensilsDiv').style.display = "block";
+    document.querySelector('.appliancesDiv').style.display = "block";
     input.value = inputText;
 }
 
