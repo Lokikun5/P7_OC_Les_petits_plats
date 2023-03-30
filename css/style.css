@@ -138,16 +138,23 @@ textarea:focus, input:focus{
 }
 .dropdown{
     background-color: #3282F7;
-    width: 15%;
+    width: calc(100% + 10px);
     height: inherit;
     position: relative;
-    left: -15%;
+    left: -10px;
     right: 0%;
+    height: 400px;
+    overflow: auto;
     top: 12%;
     bottom: 0%;
     display: none;
     border-radius: 5px;
+
 }
+
+.dropdown::-webkit-scrollbar {
+    width: 2px;
+  }
 
 .largedropdown{
     background-color: #3282F7;
@@ -166,17 +173,21 @@ textarea:focus, input:focus{
 }
 .dropdown2{
     background-color: #ED6454;
-    width: 15%;
+    width: calc(100% + 10px);
     height: inherit;
     position: relative;
-    position: relative;
-    left: -15%;
+    left: -10px;
     right: 0%;
+    height: 400px;
+    overflow: auto;
     top: 12%;
     bottom: 0%;
     display: none;
     border-radius: 5px;
 }
+.dropdown2::-webkit-scrollbar {
+    width: 2px;
+  }
 
 .largedropdown2{
     background-color: #ED6454;
@@ -190,18 +201,19 @@ textarea:focus, input:focus{
     bottom: 0%;
     border-radius: 5px;
     display: none;
-    margin-left: 80px;
+    margin-left: 20px;
 
 }
 
 .dropdown3{
     background-color: #68D9A4;
-    width: 15%;
+    width: calc(100% + 10px);
     height: inherit;
     position: relative;
-    position: relative;
-    left: -15%;
+    left: -10px;
     right: 0%;
+    height: 400px;
+    overflow: auto;
     top: 12%;
     bottom: 0%;
     display: none;
@@ -220,7 +232,7 @@ textarea:focus, input:focus{
     bottom: 0%;
     border-radius: 5px;
     display: none;
-    margin-left: 80px;
+    margin-left: 20px;
 
 }
 
@@ -319,7 +331,7 @@ textarea:focus, input:focus{
     font-size: 12px;
     width: 50%;
     height: 45%;
-    overflow: hidden;
+    overflow: scroll;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 5;
