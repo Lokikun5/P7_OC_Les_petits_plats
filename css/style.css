@@ -150,9 +150,6 @@ textarea:focus, input:focus{
     outline: none;
 }
 
-[hide='true']{
-    display: none;
-}
 .dropdown{
     background-color: #3282F7;
     width: calc(100% + 10px);
@@ -169,11 +166,16 @@ textarea:focus, input:focus{
 
 }
 
-.dropdown::-webkit-scrollbar {
-    width: 2px;
+.dropdownStyle::-webkit-scrollbar {
+    width: 10px;
   }
 .dropdown::-webkit-scrollbar-track {
-    background-color: #f2f2f2;
+    background-color: #3282F7;
+  }
+  
+.dropdownStyle::-webkit-scrollbar-thumb {
+    background-color: #c2c2c2; /* Couleur de fond de la poignée */
+    border-radius: 5px; /* Bordure arrondie pour la poignée */
   }
 
 .largedropdown{
@@ -200,12 +202,10 @@ textarea:focus, input:focus{
     display: none;
     border-radius: 5px;
 }
-.dropdown2::-webkit-scrollbar {
-    width: 2px;
-  }
+
 
 .dropdown2::-webkit-scrollbar-track {
-    background-color: #f2f2f2;
+    background-color: #ED6454;
   }
 
 .largedropdown2{

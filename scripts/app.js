@@ -121,7 +121,7 @@ function addToDOM(){
         
 } addToDOM()
 
-// load list of element function (for ingredients)
+// load list of element (for ingredients)
 function getSmallFilter(input, newDropdown, type, listOfElement){
    
         input.value = '';
@@ -139,8 +139,7 @@ function getSmallFilter(input, newDropdown, type, listOfElement){
             listElements.appendChild(element);
         } 
     }
-
-
+// load list of element (for ingredients in large dropdown)
 function getFilter(input, largedropdown, type, listOfElement){
 
     input.value = '';
@@ -179,7 +178,7 @@ function getSmallFilterU(input, newDropdown2, type, listOfElement){
         listElements.appendChild(element);
     } 
 }
-
+// load list of element (for ustensiles in large dropdown)
 function getFilterU(input, largedropdown2, type, listOfElement){
 
     input.value = '';
@@ -219,7 +218,7 @@ function getSmallFilterA(input, newDropdown3, type, listOfElement){
         listElements.appendChild(element);
     } 
 }
-
+// load list of element function (for appliances large dropdown)
 function getFilterA(input, largedropdown3, type, listOfElement){
 
     input.value = '';
@@ -446,6 +445,8 @@ function filterButtonList(event, type){
     else{
         elementsToHide.forEach(element => {
             element.setAttribute('hide', 'false');
+            const noFound = document.createElement('p');
+            noFound.innerHTML = 'Aucun resultat';
         });
     }
 }
