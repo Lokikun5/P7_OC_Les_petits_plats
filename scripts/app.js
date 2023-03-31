@@ -18,25 +18,28 @@ loadElements(recipes);
 //  ingredients dropdown triger  
 const ingredientsInput = document.getElementById('ingredientsInput');
 const ingredientsSearch = document.getElementById('ingredientsSearch');
-
+const largeDropdownInput = document.getElementById('largeDropdownInput');
 // Search ingredients
 ingredientsSearch.addEventListener('input', (event) => {filterButtonList(event, 'ingredient')});
-
+largeDropdownInput.addEventListener('input', (event) => {filterButtonList(event, 'ingredient')});
 
 //  ustensils dropdown triger 
 const ustensilsInput = document.getElementById('ustensilsInput');
 const ustensilsSearch = document.getElementById('ustensilsSearch');
+const largeDropdownInputU = document.getElementById('largeDropdownInputU');
 
 // search ustensils
 ustensilsSearch.addEventListener('input', (event) => {filterButtonList(event, 'ustensil')});
-
+largeDropdownInputU.addEventListener('input', (event) => {filterButtonList(event, 'ustensil')});
 
 // appliances dropdown triger
 const appliancesSearch = document.getElementById('appliancesSearch');
 const appliancesInput = document.getElementById('appliancesInput');
+const largeDropdownInputA = document.getElementById('largeDropdownInputA');
 
 // search appliances
 appliancesSearch.addEventListener('input', (event) => {filterButtonList(event, 'appliance')});
+largeDropdownInputA.addEventListener('input', (event) => {filterButtonList(event, 'appliance')});
 
 // small and big dropdown
 const newDropdown = document.querySelector('.dropdown');
