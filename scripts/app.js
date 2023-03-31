@@ -11,7 +11,7 @@ let ingredientTags = [];
 let applianceTags = [];
 let ustensilTags = [];
 
-let reaserchListRecipes = [];
+// let reaserchListRecipes = [];
 //init list appliances/recipes/ingredients
 loadElements(recipes);
 
@@ -444,9 +444,9 @@ function filterButtonList(event, type){
     }
     else{
         elementsToHide.forEach(element => {
+            console.log("çava?");
             element.setAttribute('hide', 'false');
-            const noFound = document.createElement('p');
-            noFound.innerHTML = 'Aucun resultat';
         });
     }
+    console.log("salut");
 }
