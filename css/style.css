@@ -49,6 +49,7 @@ padding-bottom: 50px;
     width: 90%;
     padding-top: 20px;
     display: flex;
+    gap: 10px;
     flex-direction: row;
     padding-left: 49px;
 }
@@ -59,8 +60,18 @@ padding-bottom: 50px;
     width: auto;
     position: relative;
     height: 50px;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px; 
     z-index: 1;
+}
+.tagSet{
+    width: fit-content;
+    height: 5vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px;
+    gap: 10px;
+    border-radius: 5px 5px 5px 5px;
 }
 
 .ingredientsDiv{
@@ -76,9 +87,7 @@ padding-bottom: 50px;
 }
 
 .downArrow{
-    position: absolute;
-    right: 7%;
-    top: 17px;
+
     cursor: pointer;
 }
 .downArrowBigDop{
@@ -135,8 +144,6 @@ padding-bottom: 50px;
 .text{
     font-size: 17px;
     color: white;
-    left: 1vw;
-    position: absolute;
 }
 
 textarea:focus, input:focus{

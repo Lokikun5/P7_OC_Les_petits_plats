@@ -355,6 +355,7 @@ function addATag(elementName, type, div, listElements, input){
     
     const tag = document.createElement('div');
     tag.setAttribute('class', 'filter');
+    tag.setAttribute('class', 'tagSet');
     tag.setAttribute('id', elementName);
     const text = document.createElement('p');
     text.innerText = elementName;
