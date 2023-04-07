@@ -14,7 +14,9 @@ let ustensilTags = [];
 // let reaserchListRecipes = [];
 //init list appliances/recipes/ingredients
 loadElements(recipes);
+const searchBar = document.getElementById('searchBar');
 
+searchBar.addEventListener('input',(event) => {algo()})
 //  ingredients dropdown triger  
 const ingredientsInput = document.getElementById('ingredientsInput');
 const ingredientsSearch = document.getElementById('ingredientsSearch');
@@ -62,9 +64,7 @@ function loadElements(recipes){
  appliances = [];
  ingredients = [];
  ustensils = [];
- console.log(appliances)
- console.log(ingredients)
- console.log(ustensils)
+
  recipes.forEach(recipie =>
     {   
         //get appliance
@@ -255,10 +255,17 @@ ingredientsSearch.addEventListener('click', function(){
     document.querySelector('.appliancesDiv').style.display = "block";
 
     getSmallFilter(ingredientsInput, newDropdown, 'ingredient', ingredients)
-
+    
 
 });
-
+// document.addEventListener('click', function(event) {
+//     // Check if the clicked element is within the dropdown
+//     if (!newDropdown.contains(event.target) && !largedropdown.contains(event.target)) {
+//       // If the clicked element is not within the dropdown, close the dropdown
+//       newDropdown.style.display = "none";
+//       largedropdown.style.display = "none";
+//     }
+//   });
 ingredientsInput.addEventListener('click', function(){
     
     largedropdown.style.display = "block";
@@ -372,23 +379,34 @@ function addATag(elementName, type, div, listElements, input){
     let inputText;
     switch (type){
         case 'appliance':
-            color = '#68D9A4';
-            inputText = 'Appareils';
-            applianceTags.push(elementName);
+           
+            if (!applianceTags.includes(elementName)){
+                color = '#68D9A4';
+                inputText = 'Appareils';
+                applianceTags.push(elementName);
+                console.log("salut");
+            }
 
             break;
         case 'ustensil':
-            color = '#ED6454';
-            inputText = 'Ustensiles';
-            ustensilTags.push(elementName);
+            if(!ustensilTags.includes(elementName)){
+                color = '#ED6454';
+                inputText = 'Ustensiles';
+                ustensilTags.push(elementName);
+            }
+            
             break;
         
         case 'ingredient':
-            color = '#3282F7';
-            inputText = 'Ingredient';
-            ingredientTags.push(elementName);
+            if(!ingredientTags.includes(elementName)){
+                color = '#3282F7';
+                inputText = 'Ingredient';
+                ingredientTags.push(elementName);
+            }
+            
             break;
     }
+    tag.dataset.type = inputText;
     tag.style.backgroundColor = color;
     filterResult.appendChild(tag);
     div.removeChild(listElements);
@@ -402,6 +420,8 @@ function addATag(elementName, type, div, listElements, input){
     document.querySelector('.ustensilsDiv').style.display = "block";
     document.querySelector('.appliancesDiv').style.display = "block";
     input.value = inputText;
+
+    algo()
 }
 
 
@@ -428,6 +448,7 @@ function removeTag(elementName, type){
     
     const elementToRemove = document.getElementById(elementName);
     filterResult.removeChild(elementToRemove);
+    algo()
 }
 
 function filterButtonList(event, type){
@@ -444,9 +465,77 @@ function filterButtonList(event, type){
     }
     else{
         elementsToHide.forEach(element => {
-            console.log("çava?");
+    
             element.setAttribute('hide', 'false');
         });
     }
-    console.log("salut");
+}
+
+function algo(){
+   const txt = searchBar.value;
+   console.log(txt);
+   const tags = filterResult.querySelectorAll(".tagSet");
+
+   const tagsArray = [];
+
+   tags.forEach(tag => {
+    tagsArray.push({
+        name: tag.innerText,
+        type: tag.dataset.type,
+    }) 
+   })
+   console.log(tagsArray)
+//    pour chaque recette 
+    const recipesFilter = []
+    listOfRecipes.forEach(rec => {
+        let isTagMatch = true;
+        // etape 1 : veriffier dans la recette, si on a un tag Ingrédients de coché et si la recette l'a aussi
+        const ingredientsTags = tagsArray.filter((tag) => tag.type === "ingredients");
+
+        ingredientsTags.forEach((tag) => {
+        if (!rec.ingredients.includes(tag.name)) {
+            isTagMatch = false;
+            
+        }
+        });
+        
+        // etape 2 : veriffier dans la recette, si on a un tag ustencil de coché et si la recette l'a aussi 
+        const ustensilsTags = tagsArray.filter((tag) => tag.type === "ustensils");
+
+        ustensilsTags.forEach((tag) => {
+        if (!rec.ustensils.includes(tag.name)) {
+            isTagMatch = false;
+        }
+        });
+
+        // Étape 3 : Vérifier si les tags appareils sélectionnés sont dans la recette
+        const appliancesTags = tagsArray.filter((tag) => tag.type === "appliances");
+
+        appliancesTags.forEach((tag) => {
+        if (rec.appliance !== tag.name) {
+            isTagMatch = false;
+        }
+        });
+
+        // Étape 4 : Vérifier si le texte recherché est présent dans la recette
+        if (txt.length >= 3) {
+            const searchRegex = new RegExp(txt, "i");
+  
+        if (
+          !searchRegex.test(rec.name) &&
+          !searchRegex.test(rec.description) &&
+          !rec.ingredients.some((ingredient) => searchRegex.test(ingredient.ingredient))
+        ) {
+          isTagMatch = false;
+        }
+      }
+        
+        // Étape 5 : Si toutes les vérifications sont passées, ajouter la recette à la liste filtrée
+        if (isTagMatch) {
+            recipesFilter.push(rec);
+        }
+    })
+    
+    // Étape 6 : Charger les éléments filtrés
+    loadElements(recipesFilter);
 }

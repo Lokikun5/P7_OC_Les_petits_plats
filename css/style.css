@@ -51,7 +51,7 @@ padding-bottom: 50px;
     display: flex;
     gap: 10px;
     flex-direction: row;
-    padding-left: 49px;
+    padding-left: 4rem;
 }
 
 .filter{
@@ -149,7 +149,9 @@ padding-bottom: 50px;
 textarea:focus, input:focus{
     outline: none;
 }
-
+input{
+    color: white;
+}
 .dropdown{
     background-color: #3282F7;
     width: calc(100% + 10px);
@@ -171,6 +173,10 @@ textarea:focus, input:focus{
   }
 .dropdown::-webkit-scrollbar-track {
     background-color: #3282F7;
+  }
+  .scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f5f5f5;
   }
   
 .dropdownStyle::-webkit-scrollbar-thumb {
@@ -258,7 +264,7 @@ textarea:focus, input:focus{
 }
 
 .recipe{
-    height: 40vh;
+    height: 50vh;
     padding-top: 20px;
     width: 90%;
 }
@@ -334,6 +340,8 @@ textarea:focus, input:focus{
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     font-weight: 500;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f5f5f5;
 
 }
 
