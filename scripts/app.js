@@ -99,11 +99,11 @@ function loadElements(recipes){
 }
 
 // load all Recipe card
-function addToDOM(){
+function addToDOM(recipes){
     const searchOuput = document.getElementById('searchResult');
     searchOuput.innerHTML = '';
 
-    if(listOfRecipes.length == 0 ){
+    if(recipes.length == 0 ){
         const noFound = document.createElement('p');
         noFound.innerHTML = 'Aucun resultat';
         noFound.setAttribute('class','noResult');
@@ -111,7 +111,7 @@ function addToDOM(){
     }else{
         const result = document.createElement('div');
         result.setAttribute('id', 'result');
-        listOfRecipes.forEach(recipe => {
+        recipes.forEach(recipe => {
             const recipeModel = recipeFactory(recipe);
             const recipeCard = recipeModel.getRecipeCardDom();
             result.appendChild(recipeCard);
@@ -119,26 +119,28 @@ function addToDOM(){
         searchOuput.appendChild(result);
     }
         
-} addToDOM()
+} addToDOM(listOfRecipes)
 
 // load list of element (for ingredients)
 function getSmallFilter(input, newDropdown, type, listOfElement){
-   
-        input.value = '';
-        const listElements = document.createElement('div');
-        listElements.setAttribute('class','dropdown');
-        newDropdown.appendChild(listElements);
-        listElements.setAttribute('class','smallListButtons');
-        for (let i =0; i < listOfElement.length; i++){
-            const element = document.createElement('p');
-            element.setAttribute('tag', type);
-            element.setAttribute('name', listOfElement[i]);
-            element.setAttribute('hide', 'false');
-            element.addEventListener('click', function(){addATag(listOfElement[i],type,newDropdown,listElements,input)});
-            element.innerText = listOfElement[i];
-            listElements.appendChild(element);
-        } 
-    }
+    input.value = '';
+    const listElements = document.createElement('div');
+    listElements.setAttribute('class','dropdown');
+    newDropdown.appendChild(listElements);
+    listElements.setAttribute('class','smallListButtons');
+
+    listElements.innerHTML = ''; // Vide le contenu HTML de la div
+
+    for (let i =0; i < listOfElement.length; i++){
+        const element = document.createElement('p');
+        element.setAttribute('tag', type);
+        element.setAttribute('name', listOfElement[i]);
+        element.setAttribute('hide', 'false');
+        element.addEventListener('click', function(){addATag(listOfElement[i],type,newDropdown,listElements,input)});
+        element.innerText = listOfElement[i];
+        listElements.appendChild(element);
+    } 
+}
 // load list of element (for ingredients in large dropdown)
 function getFilter(input, largedropdown, type, listOfElement){
 
@@ -150,6 +152,9 @@ function getFilter(input, largedropdown, type, listOfElement){
     listElements.style.display = "flex";
     listElements.style.flexWrap = "wrap";
     listElements.style.marginTop = "41px";
+
+    
+
     for (let i =0; i < listOfElement.length; i++){
         const element = document.createElement('p');
         element.setAttribute('tag', type);
@@ -168,6 +173,9 @@ function getSmallFilterU(input, newDropdown2, type, listOfElement){
     listElements.setAttribute('class','dropdown');
     newDropdown2.appendChild(listElements);
     listElements.setAttribute('class','smallListButtons');
+
+    listElements.innerHTML = ''; // Vide le contenu HTML de la div
+
     for (let i =0; i < listOfElement.length; i++){
         const element = document.createElement('p');
         element.setAttribute('tag', type);
@@ -208,6 +216,9 @@ function getSmallFilterA(input, newDropdown3, type, listOfElement){
     listElements.setAttribute('class','dropdown');
     newDropdown3.appendChild(listElements);
     listElements.setAttribute('class','smallListButtons');
+
+    listElements.innerHTML = ''; // Vide le contenu HTML de la div
+
     for (let i =0; i < listOfElement.length; i++){
         const element = document.createElement('p');
         element.setAttribute('tag', type);
@@ -384,7 +395,7 @@ function addATag(elementName, type, div, listElements, input){
                 color = '#68D9A4';
                 inputText = 'Appareils';
                 applianceTags.push(elementName);
-                console.log("salut");
+                
             }
 
             break;
@@ -484,36 +495,46 @@ function algo(){
         type: tag.dataset.type,
     }) 
    })
-   console.log(tagsArray)
-//    pour chaque recette 
+   
+    //    pour chaque recette 
     const recipesFilter = []
     listOfRecipes.forEach(rec => {
         let isTagMatch = true;
         // etape 1 : veriffier dans la recette, si on a un tag Ingrédients de coché et si la recette l'a aussi
-        const ingredientsTags = tagsArray.filter((tag) => tag.type === "ingredients");
+        
+        const ingredientsTags = tagsArray.filter((tag) => tag.type === "Ingredient");
+        
+        const ingredientsArray = [];
 
+        rec.ingredients.forEach(ing => {
+            ingredientsArray.push(ing.ingredient.toLowerCase())
+        })
         ingredientsTags.forEach((tag) => {
-        if (!rec.ingredients.includes(tag.name)) {
+         
+          
+        if (!ingredientsArray.includes(tag.name.toLowerCase())) {
             isTagMatch = false;
             
         }
         });
         
         // etape 2 : veriffier dans la recette, si on a un tag ustencil de coché et si la recette l'a aussi 
-        const ustensilsTags = tagsArray.filter((tag) => tag.type === "ustensils");
+        const ustensilsTags = tagsArray.filter((tag) => tag.type === "Ustensiles");
+        const usentilsArrey = rec.ustensils.map(item => item.toLowerCase());
 
         ustensilsTags.forEach((tag) => {
-        if (!rec.ustensils.includes(tag.name)) {
+        if (!usentilsArrey.includes(tag.name.toLowerCase())) {
             isTagMatch = false;
         }
         });
 
         // Étape 3 : Vérifier si les tags appareils sélectionnés sont dans la recette
-        const appliancesTags = tagsArray.filter((tag) => tag.type === "appliances");
+        const appliancesTags = tagsArray.filter((tag) => tag.type === "Appareils");
 
         appliancesTags.forEach((tag) => {
-        if (rec.appliance !== tag.name) {
+        if (rec.appliance.toLowerCase() !== tag.name.toLowerCase()) {
             isTagMatch = false;
+            console.log(isTagMatch)
         }
         });
 
@@ -529,7 +550,7 @@ function algo(){
           isTagMatch = false;
         }
       }
-        
+        console.log(isTagMatch);
         // Étape 5 : Si toutes les vérifications sont passées, ajouter la recette à la liste filtrée
         if (isTagMatch) {
             recipesFilter.push(rec);
@@ -537,5 +558,7 @@ function algo(){
     })
     
     // Étape 6 : Charger les éléments filtrés
+    console.log(recipesFilter);
     loadElements(recipesFilter);
+    addToDOM(recipesFilter);
 }

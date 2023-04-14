@@ -29,7 +29,7 @@ export function recipeFactory(data){
         
         const textTime = document.createElement('p');
         textTime.setAttribute('class','textTime');
-        textTime.textContent = time + 'min';
+        textTime.textContent = time + ' min';
         infoFirstDiv.appendChild(textTime);
 
         
