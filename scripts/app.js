@@ -16,7 +16,7 @@ let ustensilTags = [];
 loadElements(recipes);
 const searchBar = document.getElementById('searchBar');
 
-searchBar.addEventListener('input',(event) => {algo()})
+searchBar.addEventListener('input',(event) => {algo2()})
 //  ingredients dropdown triger  
 const ingredientsInput = document.getElementById('ingredientsInput');
 const ingredientsSearch = document.getElementById('ingredientsSearch');
@@ -432,7 +432,7 @@ function addATag(elementName, type, div, listElements, input){
     document.querySelector('.appliancesDiv').style.display = "block";
     input.value = inputText;
 
-    algo()
+    algo2()
 }
 
 
@@ -459,7 +459,7 @@ function removeTag(elementName, type){
     
     const elementToRemove = document.getElementById(elementName);
     filterResult.removeChild(elementToRemove);
-    algo()
+    algo2()
 }
 
 function filterButtonList(event, type){
@@ -481,84 +481,77 @@ function filterButtonList(event, type){
         });
     }
 }
+// algorithme avec des boucles
+function algo2(){
+    const txt = searchBar.value;
+    console.log(txt);
+    const tags = filterResult.querySelectorAll(".tagSet");
 
-function algo(){
-   const txt = searchBar.value;
-   console.log(txt);
-   const tags = filterResult.querySelectorAll(".tagSet");
+    const tagsArray = [];
 
-   const tagsArray = [];
+    tags.forEach(tag => {
+        tagsArray.push({
+            name: tag.innerText,
+            type: tag.dataset.type,
+        }) 
+    });
 
-   tags.forEach(tag => {
-    tagsArray.push({
-        name: tag.innerText,
-        type: tag.dataset.type,
-    }) 
-   })
-   
-    //    pour chaque recette 
-    const recipesFilter = []
-    listOfRecipes.forEach(rec => {
+    // Pour chaque recette 
+    const recipesFilter = [];
+    for (let i = 0; i < listOfRecipes.length; i++) {
         let isTagMatch = true;
-        // etape 1 : veriffier dans la recette, si on a un tag Ingrédients de coché et si la recette l'a aussi
-        
+        // Étape 1 : Vérifier dans la recette, si on a un tag Ingrédients de coché et si la recette l'a aussi
         const ingredientsTags = tagsArray.filter((tag) => tag.type === "Ingredient");
-        
         const ingredientsArray = [];
-
-        rec.ingredients.forEach(ing => {
-            ingredientsArray.push(ing.ingredient.toLowerCase())
-        })
-        ingredientsTags.forEach((tag) => {
-         
-          
-        if (!ingredientsArray.includes(tag.name.toLowerCase())) {
-            isTagMatch = false;
-            
+        for (let j = 0; j < listOfRecipes[i].ingredients.length; j++) {
+            ingredientsArray.push(listOfRecipes[i].ingredients[j].ingredient.toLowerCase());
         }
-        });
-        
-        // etape 2 : veriffier dans la recette, si on a un tag ustencil de coché et si la recette l'a aussi 
+        for (let k = 0; k < ingredientsTags.length; k++) {
+            if (!ingredientsArray.includes(ingredientsTags[k].name.toLowerCase())) {
+                isTagMatch = false;
+            }
+        }
+
+        // Étape 2 : Vérifier dans la recette, si on a un tag Ustensiles de coché et si la recette l'a aussi
         const ustensilsTags = tagsArray.filter((tag) => tag.type === "Ustensiles");
-        const usentilsArrey = rec.ustensils.map(item => item.toLowerCase());
-
-        ustensilsTags.forEach((tag) => {
-        if (!usentilsArrey.includes(tag.name.toLowerCase())) {
-            isTagMatch = false;
+        const ustensilsArray = listOfRecipes[i].ustensils.map(item => item.toLowerCase());
+        for (let k = 0; k < ustensilsTags.length; k++) {
+            if (!ustensilsArray.includes(ustensilsTags[k].name.toLowerCase())) {
+                isTagMatch = false;
+            }
         }
-        });
 
-        // Étape 3 : Vérifier si les tags appareils sélectionnés sont dans la recette
+        // Étape 3 : Vérifier si les tags Appareils sélectionnés sont dans la recette 
         const appliancesTags = tagsArray.filter((tag) => tag.type === "Appareils");
-
-        appliancesTags.forEach((tag) => {
-        if (rec.appliance.toLowerCase() !== tag.name.toLowerCase()) {
-            isTagMatch = false;
-            console.log(isTagMatch)
+        for (let k = 0; k < appliancesTags.length; k++) {
+            if (listOfRecipes[i].appliance.toLowerCase() !== appliancesTags[k].name.toLowerCase()) {
+                isTagMatch = false;
+                console.log(isTagMatch);
+            }
         }
-        });
 
         // Étape 4 : Vérifier si le texte recherché est présent dans la recette
         if (txt.length >= 3) {
             const searchRegex = new RegExp(txt, "i");
-  
-        if (
-          !searchRegex.test(rec.name) &&
-          !searchRegex.test(rec.description) &&
-          !rec.ingredients.some((ingredient) => searchRegex.test(ingredient.ingredient))
-        ) {
-          isTagMatch = false;
+            if (
+                !searchRegex.test(listOfRecipes[i].name) &&
+                !searchRegex.test(listOfRecipes[i].description) &&
+                !listOfRecipes[i].ingredients.some((ingredient) => searchRegex.test(ingredient.ingredient))
+            ) {
+                isTagMatch = false;
+            }
         }
-      }
+
         console.log(isTagMatch);
         // Étape 5 : Si toutes les vérifications sont passées, ajouter la recette à la liste filtrée
         if (isTagMatch) {
-            recipesFilter.push(rec);
+            recipesFilter.push(listOfRecipes[i]);
         }
-    })
-    
+    }
+
     // Étape 6 : Charger les éléments filtrés
     console.log(recipesFilter);
     loadElements(recipesFilter);
     addToDOM(recipesFilter);
 }
+
