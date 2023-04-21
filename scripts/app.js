@@ -15,7 +15,7 @@ loadElements(recipes);
 const searchBar = document.getElementById("searchBar");
 
 searchBar.addEventListener("input", (event) => {
-  algo2();
+  algo2(event);
 });
 //  ingredients dropdown triger
 const ingredientsInput = document.getElementById("ingredientsInput");
@@ -133,23 +133,27 @@ function getSmallFilter(input, newDropdown, type, listOfElement) {
   input.value = "";
   const listElements = document.createElement("div");
   listElements.setAttribute("class", "dropdown");
-  newDropdown.appendChild(listElements);
-  listElements.setAttribute("class", "smallListButtons");
 
-  listElements.innerHTML = ""; // Vide le contenu HTML de la div
+  // Check if elements already exist, if not, then just create the elements
+  if (newDropdown.childElementCount === 0) {
+    newDropdown.appendChild(listElements);
 
-  for (let i = 0; i < listOfElement.length; i++) {
-    const element = document.createElement("p");
-    element.setAttribute("tag", type);
-    element.setAttribute("name", listOfElement[i]);
-    element.setAttribute("hide", "false");
-    element.addEventListener("click", function () {
-      addATag(listOfElement[i], type, newDropdown, listElements, input);
-    });
-    element.innerText = listOfElement[i];
-    listElements.appendChild(element);
+    listElements.setAttribute("class", "smallListButtons");
+
+    for (let i = 0; i < listOfElement.length; i++) {
+      const element = document.createElement("p");
+      element.setAttribute("tag", type);
+      element.setAttribute("name", listOfElement[i]);
+      element.setAttribute("hide", "false");
+      element.addEventListener("click", function () {
+        addATag(listOfElement[i], type, newDropdown, listElements, input);
+      });
+      element.innerText = listOfElement[i];
+      listElements.appendChild(element);
+    }
   }
 }
+
 // load list of element (for ingredients in large dropdown)
 function getFilter(input, largedropdown, type, listOfElement) {
   input.value = "";
@@ -178,21 +182,22 @@ function getSmallFilterU(input, newDropdown2, type, listOfElement) {
   input.value = "";
   const listElements = document.createElement("div");
   listElements.setAttribute("class", "dropdown");
-  newDropdown2.appendChild(listElements);
-  listElements.setAttribute("class", "smallListButtons");
+  // Check if elements already exist, if not, then just create the elements
+  if (newDropdown2.childElementCount === 0) {
+    newDropdown2.appendChild(listElements);
+    listElements.setAttribute("class", "smallListButtons");
 
-  listElements.innerHTML = ""; // Vide le contenu HTML de la div
-
-  for (let i = 0; i < listOfElement.length; i++) {
-    const element = document.createElement("p");
-    element.setAttribute("tag", type);
-    element.setAttribute("name", listOfElement[i]);
-    element.setAttribute("hide", "false");
-    element.addEventListener("click", function () {
-      addATag(listOfElement[i], type, newDropdown2, listElements, input);
-    });
-    element.innerText = listOfElement[i];
-    listElements.appendChild(element);
+    for (let i = 0; i < listOfElement.length; i++) {
+      const element = document.createElement("p");
+      element.setAttribute("tag", type);
+      element.setAttribute("name", listOfElement[i]);
+      element.setAttribute("hide", "false");
+      element.addEventListener("click", function () {
+        addATag(listOfElement[i], type, newDropdown2, listElements, input);
+      });
+      element.innerText = listOfElement[i];
+      listElements.appendChild(element);
+    }
   }
 }
 // load list of element (for ustensiles in large dropdown)
@@ -223,21 +228,23 @@ function getSmallFilterA(input, newDropdown3, type, listOfElement) {
   input.value = "";
   const listElements = document.createElement("div");
   listElements.setAttribute("class", "dropdown");
-  newDropdown3.appendChild(listElements);
-  listElements.setAttribute("class", "smallListButtons");
+  if (newDropdown3.childElementCount === 0) {
+    newDropdown3.appendChild(listElements);
+    listElements.setAttribute("class", "smallListButtons");
 
-  listElements.innerHTML = ""; // Vide le contenu HTML de la div
+    listElements.innerHTML = ""; // Vide le contenu HTML de la div
 
-  for (let i = 0; i < listOfElement.length; i++) {
-    const element = document.createElement("p");
-    element.setAttribute("tag", type);
-    element.setAttribute("name", listOfElement[i]);
-    element.setAttribute("hide", "false");
-    element.addEventListener("click", function () {
-      addATag(listOfElement[i], type, newDropdown3, listElements, input);
-    });
-    element.innerText = listOfElement[i];
-    listElements.appendChild(element);
+    for (let i = 0; i < listOfElement.length; i++) {
+      const element = document.createElement("p");
+      element.setAttribute("tag", type);
+      element.setAttribute("name", listOfElement[i]);
+      element.setAttribute("hide", "false");
+      element.addEventListener("click", function () {
+        addATag(listOfElement[i], type, newDropdown3, listElements, input);
+      });
+      element.innerText = listOfElement[i];
+      listElements.appendChild(element);
+    }
   }
 }
 // load list of element function (for appliances large dropdown)
@@ -267,6 +274,7 @@ function getFilterA(input, largedropdown3, type, listOfElement) {
 ingredientsSearch.addEventListener("click", function () {
   newDropdown.style.display = "block";
   largedropdown.style.display = "none";
+  newDropdown.classList.add("ok");
 
   newDropdown2.style.display = "none";
   largedropdown2.style.display = "none";
@@ -278,14 +286,7 @@ ingredientsSearch.addEventListener("click", function () {
 
   getSmallFilter(ingredientsInput, newDropdown, "ingredient", ingredients);
 });
-// document.addEventListener('click', function(event) {
-//     // Check if the clicked element is within the dropdown
-//     if (!newDropdown.contains(event.target) && !largedropdown.contains(event.target)) {
-//       // If the clicked element is not within the dropdown, close the dropdown
-//       newDropdown.style.display = "none";
-//       largedropdown.style.display = "none";
-//     }
-//   });
+
 ingredientsInput.addEventListener("click", function () {
   largedropdown.style.display = "block";
   newDropdown.style.display = "none";
@@ -531,12 +532,17 @@ function algo2() {
     // Étape 4 : Vérifier si le texte recherché est présent dans la recette
     if (txt.length >= 3) {
       const searchRegex = new RegExp(txt, "i");
+      let hasMatch = false;
+      for (let j = 0; j < listOfRecipes[i].ingredients.length; j++) {
+        if (searchRegex.test(listOfRecipes[i].ingredients[j].ingredient)) {
+          hasMatch = true;
+          break;
+        }
+      }
       if (
         !searchRegex.test(listOfRecipes[i].name) &&
         !searchRegex.test(listOfRecipes[i].description) &&
-        !listOfRecipes[i].ingredients.some((ingredient) =>
-          searchRegex.test(ingredient.ingredient)
-        )
+        !hasMatch
       ) {
         isTagMatch = false;
       }

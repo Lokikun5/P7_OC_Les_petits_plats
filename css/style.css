@@ -9,10 +9,12 @@ header {
 main {
   padding-top: 10px;
   padding-bottom: 50px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .research {
-  width: 90%;
+  width: 88%;
   padding: 0 5% 0 5%;
   display: flex;
   flex-direction: row;
@@ -118,7 +120,7 @@ main {
   overflow: hidden;
 }
 .smallListButtons {
-  background-color: rgba(0, 0, 0, 0);
+  /* background-color: rgba(0, 0, 0, 0); */
   color: white;
   overflow: hidden;
 }
@@ -266,7 +268,7 @@ input:focus {
 .recipe {
   height: 50vh;
   padding-top: 20px;
-  width: 90%;
+  width: 26vw;
 }
 
 .fakeImg {
@@ -291,8 +293,8 @@ input:focus {
   width: 20px;
   height: 20px;
   position: absolute;
-  right: 17%;
-  top: 30%;
+  right: 5.5vw;
+  top: 2.5vh;
 }
 
 .infoSecondDiv {
@@ -312,7 +314,7 @@ input:focus {
 
 .textTime {
   position: absolute;
-  right: 3%;
+  right: 4%;
   font-weight: 700;
 }
 
