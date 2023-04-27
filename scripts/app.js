@@ -9,11 +9,11 @@ let ingredientTags = [];
 let applianceTags = [];
 let ustensilTags = [];
 
-// let reaserchListRecipes = [];
-//init list appliances/recipes/ingredients
+
 loadElements(recipes);
 const searchBar = document.getElementById("searchBar");
 
+// Reaserch recipes
 searchBar.addEventListener("input", (event) => {
   algo2(event);
 });
@@ -21,6 +21,7 @@ searchBar.addEventListener("input", (event) => {
 const ingredientsInput = document.getElementById("ingredientsInput");
 const ingredientsSearch = document.getElementById("ingredientsSearch");
 const largeDropdownInput = document.getElementById("largeDropdownInput");
+
 // Search ingredients
 ingredientsSearch.addEventListener("input", (event) => {
   filterButtonList(event, "ingredient");
@@ -68,6 +69,12 @@ const newDropdown3 = document.querySelector(".dropdown3");
 const largedropdown3 = document.querySelector(".largedropdown3");
 
 const filterResult = document.getElementsByClassName("filterResult")[0];
+
+// large dropdown arrow 
+const bigDropdownArrow = document.getElementById("big1");
+const bigDropdownArrowApp = document.getElementById("big3");
+const big2 = document.getElementById("big2");
+
 
 function loadElements(recipes) {
   appliances = [];
@@ -176,6 +183,7 @@ function getFilter(input, largedropdown, type, listOfElement) {
     element.innerText = listOfElement[i];
     listElements.appendChild(element);
   }
+
 }
 // load list of element function (for ustensiles)
 function getSmallFilterU(input, newDropdown2, type, listOfElement) {
@@ -270,11 +278,10 @@ function getFilterA(input, largedropdown3, type, listOfElement) {
   }
 }
 
-// ingredients dropdown function
+// ingredients dropdown function to close the other dropdowns and launch the list
 ingredientsSearch.addEventListener("click", function () {
   newDropdown.style.display = "block";
   largedropdown.style.display = "none";
-  newDropdown.classList.add("ok");
 
   newDropdown2.style.display = "none";
   largedropdown2.style.display = "none";
@@ -286,6 +293,7 @@ ingredientsSearch.addEventListener("click", function () {
 
   getSmallFilter(ingredientsInput, newDropdown, "ingredient", ingredients);
 });
+
 
 ingredientsInput.addEventListener("click", function () {
   largedropdown.style.display = "block";
@@ -299,6 +307,12 @@ ingredientsInput.addEventListener("click", function () {
   largedropdown3.style.display = "none";
 
   getFilter(ingredientsInput, largedropdown, "ingredient", ingredients);
+
+  // close big dropdown ingredients
+  bigDropdownArrow.addEventListener("click", function (){
+    largedropdown.style.display = "none";
+    document.querySelector(".ingredientsDiv").style.display = "block";
+  });
 });
 
 // ustensils dropdown function
@@ -328,10 +342,18 @@ ustensilsInput.addEventListener("click", function () {
 
   newDropdown3.style.display = "none";
   largedropdown3.style.display = "none";
-
-  getFilterU(ustensilsInput, largedropdown2, "ustensil", ustensils);
   document.querySelector(".ingredientsDiv").style.display = "block";
   document.querySelector(".appliancesDiv").style.display = "block";
+
+  getFilterU(ustensilsInput, largedropdown2, "ustensil", ustensils);
+  
+
+  // close big dropdown ustensils
+  bigDropdownArrowApp.addEventListener("click", function (){
+    
+    largedropdown2.style.display = "none";
+    document.querySelector(".ustensilsDiv").style.display = "block";
+  });
 });
 
 // appliance dropdown function
@@ -364,7 +386,13 @@ appliancesInput.addEventListener("click", function () {
   document.querySelector(".ustensilsDiv").style.display = "block";
   document.querySelector(".ingredientsDiv").style.display = "block";
   getFilterA(ustensilsInput, largedropdown3, "appliance", appliances);
+
+  big2.addEventListener("click", function (){
+    largedropdown3.style.display = "none";
+    document.querySelector(".appliancesDiv").style.display = "block";
+  });
 });
+
 
 function addATag(elementName, type, div, listElements, input) {
   const tag = document.createElement("div");
