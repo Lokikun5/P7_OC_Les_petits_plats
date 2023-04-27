@@ -259,14 +259,7 @@ input:focus {
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
 }
-.button::placeholder {
-  color: #ffffff;
-}
-@media (max-width: 768px) {
-  #result {
-    grid-template-columns: 1fr;
-  }
-}
+
 
 .recipe {
   height: 50vh;
@@ -358,4 +351,27 @@ input:focus {
 
 [hide="true"] {
   display: none;
+}
+
+@media (max-width: 768px) {
+  #result {
+    padding-top: 70px;
+    padding-left: 20px;
+    padding-right: 60px;
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+  .recipe{
+    height: 37vh;
+    padding-top: 20px;
+    width: 73vw;
+  }
+  .filterButtons{
+    padding-left: 0vw;
+  }
+  .timer{
+    display: none;
+  }
 }
