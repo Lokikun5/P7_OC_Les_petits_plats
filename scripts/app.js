@@ -122,24 +122,29 @@ function addToDOM(recipes){
 } addToDOM(listOfRecipes)
 
 // load list of element (for ingredients)
-function getSmallFilter(input, newDropdown, type, listOfElement){
-    input.value = '';
-    const listElements = document.createElement('div');
-    listElements.setAttribute('class','dropdown');
+function getSmallFilter(input, newDropdown, type, listOfElement) {
+  input.value = "";
+  const listElements = document.createElement("div");
+  listElements.setAttribute("class", "dropdown");
+
+  // Check if elements already exist, if not, then just create the elements
+  if (newDropdown.childElementCount === 0) {
     newDropdown.appendChild(listElements);
-    listElements.setAttribute('class','smallListButtons');
 
-    listElements.innerHTML = ''; // Vide le contenu HTML de la div
+    listElements.setAttribute("class", "smallListButtons");
 
-    for (let i =0; i < listOfElement.length; i++){
-        const element = document.createElement('p');
-        element.setAttribute('tag', type);
-        element.setAttribute('name', listOfElement[i]);
-        element.setAttribute('hide', 'false');
-        element.addEventListener('click', function(){addATag(listOfElement[i],type,newDropdown,listElements,input)});
-        element.innerText = listOfElement[i];
-        listElements.appendChild(element);
-    } 
+    for (let i = 0; i < listOfElement.length; i++) {
+      const element = document.createElement("p");
+      element.setAttribute("tag", type);
+      element.setAttribute("name", listOfElement[i]);
+      element.setAttribute("hide", "false");
+      element.addEventListener("click", function () {
+        addATag(listOfElement[i], type, newDropdown, listElements, input);
+      });
+      element.innerText = listOfElement[i];
+      listElements.appendChild(element);
+    }
+  }
 }
 // load list of element (for ingredients in large dropdown)
 function getFilter(input, largedropdown, type, listOfElement){
@@ -166,25 +171,27 @@ function getFilter(input, largedropdown, type, listOfElement){
     } 
 }
 // load list of element function (for ustensiles)
-function getSmallFilterU(input, newDropdown2, type, listOfElement){
-   
-    input.value = '';
-    const listElements = document.createElement('div');
-    listElements.setAttribute('class','dropdown');
+function getSmallFilterU(input, newDropdown2, type, listOfElement) {
+  input.value = "";
+  const listElements = document.createElement("div");
+  listElements.setAttribute("class", "dropdown");
+  // Check if elements already exist, if not, then just create the elements
+  if (newDropdown2.childElementCount === 0) {
     newDropdown2.appendChild(listElements);
-    listElements.setAttribute('class','smallListButtons');
+    listElements.setAttribute("class", "smallListButtons");
 
-    listElements.innerHTML = ''; // Vide le contenu HTML de la div
-
-    for (let i =0; i < listOfElement.length; i++){
-        const element = document.createElement('p');
-        element.setAttribute('tag', type);
-        element.setAttribute('name', listOfElement[i]);
-        element.setAttribute('hide', 'false');
-        element.addEventListener('click', function(){addATag(listOfElement[i],type,newDropdown2,listElements,input)});
-        element.innerText = listOfElement[i];
-        listElements.appendChild(element);
-    } 
+    for (let i = 0; i < listOfElement.length; i++) {
+      const element = document.createElement("p");
+      element.setAttribute("tag", type);
+      element.setAttribute("name", listOfElement[i]);
+      element.setAttribute("hide", "false");
+      element.addEventListener("click", function () {
+        addATag(listOfElement[i], type, newDropdown2, listElements, input);
+      });
+      element.innerText = listOfElement[i];
+      listElements.appendChild(element);
+    }
+  }
 }
 // load list of element (for ustensiles in large dropdown)
 function getFilterU(input, largedropdown2, type, listOfElement){
@@ -209,25 +216,29 @@ function getFilterU(input, largedropdown2, type, listOfElement){
 }
 
 // load list of element function (for appliances)
-function getSmallFilterA(input, newDropdown3, type, listOfElement){
-   
-    input.value = '';
-    const listElements = document.createElement('div');
-    listElements.setAttribute('class','dropdown');
+function getSmallFilterA(input, newDropdown3, type, listOfElement) {
+  input.value = "";
+  const listElements = document.createElement("div");
+  listElements.setAttribute("class", "dropdown");
+  if (newDropdown3.childElementCount === 0){
     newDropdown3.appendChild(listElements);
-    listElements.setAttribute('class','smallListButtons');
+  listElements.setAttribute("class", "smallListButtons");
 
-    listElements.innerHTML = ''; // Vide le contenu HTML de la div
+  listElements.innerHTML = ""; // Vide le contenu HTML de la div
 
-    for (let i =0; i < listOfElement.length; i++){
-        const element = document.createElement('p');
-        element.setAttribute('tag', type);
-        element.setAttribute('name', listOfElement[i]);
-        element.setAttribute('hide', 'false');
-        element.addEventListener('click', function(){addATag(listOfElement[i],type,newDropdown3,listElements,input)});
-        element.innerText = listOfElement[i];
-        listElements.appendChild(element);
-    } 
+  for (let i = 0; i < listOfElement.length; i++) {
+    const element = document.createElement("p");
+    element.setAttribute("tag", type);
+    element.setAttribute("name", listOfElement[i]);
+    element.setAttribute("hide", "false");
+    element.addEventListener("click", function () {
+      addATag(listOfElement[i], type, newDropdown3, listElements, input);
+    });
+    element.innerText = listOfElement[i];
+    listElements.appendChild(element);
+  }
+  }
+  
 }
 // load list of element function (for appliances large dropdown)
 function getFilterA(input, largedropdown3, type, listOfElement){
