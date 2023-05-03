@@ -4,20 +4,19 @@
     "description": "Projet openclassrooms numero 7 \r Objectif du projet : WIP",
     "main": "index.js",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/Lokikun5/P7_OC_Les_petits_plats.git"
+        "type": "git",
+        "url": "git+https://github.com/Lokikun5/P7_OC_Les_petits_plats.git"
     },
     "author": "",
     "license": "ISC",
     "bugs": {
-      "url": "https://github.com/Lokikun5/P7_OC_Les_petits_plats/issues"
+        "url": "https://github.com/Lokikun5/P7_OC_Les_petits_plats/issues"
     },
     "homepage": "https://github.com/Lokikun5/P7_OC_Les_petits_plats#readme",
     "devDependencies": {
-      "eslint": "^8.38.0"
+        "eslint": "^8.39.0"
     }
-  }
-  
+}
